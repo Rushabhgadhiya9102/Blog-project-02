@@ -1,0 +1,146 @@
+<%- include('../partials/header') %>
+
+<article class="bg-[url('../images/bg-gradient-4.svg')] bg-cover bg-norepeat bg-indigo-950 w-full h-full">
+  <section class="py-30">
+    <div class="container px-5 mx-auto lg:max-w-7xl">
+      <div class="title flex items-center justify-between mb-10">
+        <span class="border-b-1 border-white w-full"></span>
+        <h2 class="text-4xl text-white font-extrabold w-200 text-center"
+          >My Blogs</h2
+        >
+        <span class="border-b-1 border-white w-full"></span>
+      </div>
+  
+      <% if (blogs.length === 0 ) {%>
+      <div class="text-center text-white">
+        <a href="/addBlog" class="w-full">
+          <div class="flex flex-col justify-center items-center h-120 rounded-2xl bg-neutral-800/50 text-gray-500">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-20">
+              <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z" clip-rule="evenodd" />
+            </svg>
+            <p class="text-center text-3xl font-bold">Add Blogs</p>
+          </div>
+        </a>
+      </div>
+  
+      <% } else { %>
+  
+      <div class="grid grid-cols-3 gap-6">
+        <% blogs.forEach(blog =>{ %>
+  
+        <div class="bg-black group text-white overflow-hidden rounded-2xl relative w-full h-120">
+          <div class="relative -mt-px overflow-hidden">
+            <img
+              src="<%= blog.blogImage %>"
+              alt=""
+              class="h-90 w-full group-hover:scale-105 transition-all duration-300 object-cover object-center"
+            />
+            <div
+              class="absolute bottom-0 z-10 h-60 w-full bg-gradient-to-t pointer-events-none from-black to-transparent"
+            ></div>
+          </div>
+          <div class="px-4 pb-4">
+            <p
+              class="category-name absolute right-5 top-5 py-1 px-2 rounded bg-indigo-900 text-center text-sm text-white"
+            >
+              <%= blog.category %>
+            </p>
+            <div class="absolute bottom-5 left-0 right-0 px-3 text-white">
+              <div class="flex justify-between items-end border-b-1 pb-3">
+                <a href="/blogDetails/<%= blog._id %>" class="text-xl hover:underline"> <%= blog.title.length > 25 ? blog.title.substring(0, 25) + "..." : blog.title %> </a>
+                <span class="text-sm"><%= blog.author.userName %></span>
+              </div>
+              <div class="flex items-center justify-between mt-3">
+                <div
+                  class="hidden group-hover:flex space-x-3 transition-all duration-300"
+                >
+                  <a href="/delete/<%= blog._id %>" class="text-red-500">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      class="size-5"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </a>
+  
+                  <a href="/edit/<%= blog._id %>" class="text-indigo-600">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      class="size-5"
+                    >
+                      <path
+                        d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z"
+                      />
+                      <path
+                        d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z"
+                      />
+                    </svg>
+                  </a>
+                </div>
+  
+                <p class="text-end text-sm ms-auto flex space-x-3">
+                  <span class="capitalize">
+                    <%= new Date(blog.createdAt).toLocaleDateString('en-GB', { day
+                    : '2-digit', month: 'short', year: 'numeric' }) %>
+                  </span>
+  
+                  <span class="capitalize">
+                      
+                      <%
+                     const now = new Date()
+                     const created = new Date(blog.createdAt)
+   
+                     const seconds = now - created
+                     const minutes = Math.floor(seconds/ 1000 / 60)
+                     const hours = Math.floor(minutes / 60)
+                     const days = Math.floor(hours / 24)
+   
+                     let timeAgo = ''
+   
+                     if(minutes < 1){
+                       timeAgo = 'Just Now'
+                     }else if(minutes < 60){
+                       timeAgo = minutes + ' Minutes Ago'
+                     }else if(hours < 24){
+                       timeAgo = hours + ' Hours Ago'
+                     }else {
+                       timeAgo = days + ' Days Ago'
+                     }
+                     %>
+                      
+                      <%= timeAgo %> 
+                    </span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <% }) %>
+  
+        <a href="/addBlog" class="w-full group">
+          <div class="flex justify-center items-center h-120 rounded-2xl bg-neutral-800/50 text-gray-600">
+            <div class="group-hover:scale-110 duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-20 mx-auto">
+                <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z" clip-rule="evenodd" />
+              </svg>
+              <p class="text-center text-3xl font-bold">Add Blogs</p>
+            </div>
+          </div>
+        </a>
+      </div>
+  
+      <% } %>
+    </div>
+  </section>
+</article>
+
+<%- include('../partials/footer') %>

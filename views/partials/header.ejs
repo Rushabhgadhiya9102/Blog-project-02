@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body>
+    <header class="fixed bottom-5 left-0 right-0 max-w-4xl mx-auto z-15">
+      <nav
+        class="flex gap-x-5 border-2 border-violet-400 rounded-2xl items-center py-2 px-5 bg-indigo-950/80 backdrop-blur-sm"
+      >
+        <a href="/" class="pr-3 border-r border-gray-600">
+          <img src="../../images/logo.png" class="size-13 w-full" alt="" />
+        </a>
+
+        <ul class="flex items-center mx-auto text-white gap-x-5">
+
+          <li class="h-6 overflow-hidden relative group">
+            <a href="/myBlogs">
+              <span
+                class="block group-hover:-translate-y-full transition-transform duration-300"
+                >My Blog</span
+              >
+              <span
+                class="block absolute top-full left-0 group-hover:translate-y-[-100%] transition-transform duration-300"
+                >My Blog</span
+              >
+            </a>
+          </li>
+
+          <li class="h-6 overflow-hidden relative group">
+            <a href="/allBlogs">
+              <span
+                class="block group-hover:-translate-y-full transition-transform duration-300"
+                >Blogs</span
+              >
+              <span
+                class="block absolute top-full left-0 group-hover:translate-y-[-100%] transition-transform duration-300"
+                >Blogs</span
+              >
+            </a>
+          </li>
+
+          <li class="h-6 overflow-hidden relative group">
+            <a href="/category">
+              <span
+                class="block group-hover:-translate-y-full transition-transform duration-300"
+                >Category</span
+              >
+              <span
+                class="block absolute top-full left-0 group-hover:translate-y-[-100%] transition-transform duration-300"
+                >Category</span
+              >
+            </a>
+          </li>
+        </ul>
+
+        <a href="/about" class="nav-link border-l border-gray-600 pl-3">
+          <div class="shrink-0 group block">
+            <div class="flex items-center">
+              <img
+                class="inline-block shrink-0 size-7.5 rounded-full"
+                src="<%= user.profileImage || '../../images/default-avatar.jpg' %>"
+                alt="Avatar"
+              />
+              <div class="ms-3">
+                <h3 class="font-semibold text-white"><%= user.userName %></h3>
+                <p
+                  class="text-sm font-medium text-gray-400 dark:text-neutral-500"
+                  ><%= user.email %></p
+                >
+              </div>
+            </div>
+          </div>
+        </a>
+      </nav>
+    </header></body
+  ></html
+>

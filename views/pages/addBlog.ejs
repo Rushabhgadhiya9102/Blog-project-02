@@ -1,0 +1,136 @@
+<%- include('../partials/header') %>
+
+<section class="bg-indigo-950">
+  <div
+    class="flex items-center flex-col justify-between bg-[url('../../images/bg-gradient-2.png')] bg-cover text-sm text-white max-md:px-4 text-center h-screen"
+  >
+    <form
+      action=""
+      method="post"
+      enctype="multipart/form-data"
+      class="flex flex-col items-center justify-center h-full"
+    >
+      <h1 class="text-4xl md:text-[40px]"> What do you want to create? </h1>
+      <p class="text-base mt-6"
+        >Create something amazing with your exprience.</p
+      >
+      <div class="w-170 bg-white rounded-xl overflow-hidden mt-4">
+        <textarea
+          class="w-full py-3 px-5 pb-0 resize-none outline-none bg-transparent text-black"
+          placeholder="Tell us about your exprience"
+          name="blogContent"
+          rows="3"
+          oninput="this.style.height = ''; this.style.height = Math.min(this.scrollHeight, 260) + 'px'"
+          ><%- blog ? blog.blogContent : '' %></textarea>
+        <div class="flex items-center justify-between pb-3 px-3">
+          <label
+            class="flex items-center justify-center font-medium rounded-full cursor-pointer"
+            aria-label="Add"
+            for="blogFile"
+          >
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke-width="1.5" 
+              stroke="currentColor" 
+              class="size-3 text-slate-500">
+                <path 
+                  stroke-linecap="round" 
+                  stroke-linejoin="round"  
+                  d="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13" 
+                />
+            </svg>
+              <span class="text-xs text-slate-500 ms-1">Uploads</span>
+          </label>
+          <input type="file" name="blogImage" id="blogFile" class="hidden" />
+          <button
+            class="flex items-center justify-center p-1 rounded size-6 <%= blog? 'bg-green-600' : 'bg-indigo-600' %> cursor-pointer"
+            aria-label="Send"
+            type="submit"
+          >
+            <svg
+              width="11"
+              height="12"
+              viewBox="0 0 11 12"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1 5.5 5.5 1 10 5.5m-4.5 5.143V1"
+                stroke="#fff"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-4 mt-4 text-slate-400 w-full">
+        <input
+          type="text"
+          name="title"
+          class="placeholder-slate-500 p-2 rounded-lg bg-white text-black focus:outline-none"
+          placeholder="Enter Title"
+          value="<%= blog ? blog.title : '' %>"
+        />
+
+        <select
+          type="text"
+          name="category"
+          class="p-2 focus:outline-none rounded-lg bg-white text-black"
+        >
+          <option value="" selected disabled class="text-black"
+            >--- Select Category ---</option
+          >
+          <option class="text-black" <%= blog?.category === "Personal Blog" ? 'selected' : '' %> value="Personal Blog"
+            >Personal Blog</option
+          >
+          <option class="text-black" <%= blog?.category === "Entertainment" ? 'selected' : '' %> value="Entertainment"
+            >Entertainment</option
+          >
+          <option class="text-black" <%= blog?.category === "LifeStyle" ? 'selected' : '' %> value="LifeStyle">LifeStyle</option>
+          <option class="text-black" <%= blog?.category === "Travel" ? 'selected' : '' %> value="Travel">Travel</option>
+          <option class="text-black" <%= blog?.category === "Technology" ? 'selected' : '' %> value="Technology">Technology</option>
+          <option class="text-black" <%= blog?.category === "Sustainablity" ? 'selected' : '' %> value="Sustainablity"
+            >Sustainablity</option
+          >
+          <option class="text-black" <%= blog?.category === "Nature" ? 'selected' : '' %> value="Nature">Nature</option>
+          <option class="text-black" <%= blog?.category === "Music" ? 'selected' : '' %> value="Music">Music</option>
+          <option class="text-black" <%= blog?.category === "Culture" ? 'selected' : '' %> value="Culture">Culture</option>
+          <option class="text-black" <%= blog?.category === "Business" ? 'selected' : '' %> value="Business">Business</option>
+          <option class="text-black" <%= blog?.category === "Sport" ? 'selected' : '' %> value="Sport">Sport</option>
+          <option class="text-black" <%= blog?.category === "Productivity and Self-Development" ? 'selected' : '' %> value="Productivity and Self-Development"
+            >Productivity and Self-Development</option
+          >
+          <option class="text-black" <%= blog?.category === "Health and Fitness" ? 'selected' : '' %> value="Health and Fitness"
+            >Health and Fitness</option
+          >
+          <option class="text-black" <%= blog?.category === "Gaming" ? 'selected' : '' %> value="Gaming">Gaming</option>
+          <option class="text-black" <%= blog?.category === "News and Politics" ? 'selected' : '' %> value="News and Politics"
+            >News and Politics</option
+          >
+          <option class="text-black" <%= blog?.category === "Food and Cooking" ? 'selected' : '' %> value="Food and Cooking"
+            >Food and Cooking</option
+          >
+        </select>
+        <div class="w-full h-px bg-gray-400/50"></div>
+        <div class="w-full h-px bg-gray-400/50"></div>
+        <p class="cursor-pointer">Can you translate something for me?</p>
+        <p class="cursor-pointer">How can I be more productive?</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const textarea = document.querySelector("textarea[name='blogContent']");
+    if (textarea && textarea.value.trim() !== "") {
+      textarea.style.height = '';
+      textarea.style.height = Math.min(textarea.scrollHeight, 260) + 'px';
+    }
+  });
+</script>
+
+<%- include('../partials/footer') %>

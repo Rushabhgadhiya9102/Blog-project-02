@@ -1,0 +1,190 @@
+<%- include('../partials/header') %>
+
+  <article class="bg-indigo-950 h-full w-full bg-[url('../images/bg-gradient-2.png')] bg-cover bg-norepeat]">
+    <section class="container mx-auto px-5 py-30 lg:max-w-7xl">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+
+        <!-------------- BLOG DETAILS START --------------->
+        <div class="col-span-2">
+          <div class="title text-white">
+            <h2
+              class="text-xl sm:text-2xl md:text-3xl lg:text-5xl text-5xl font-bold leading-tight tracking-tight my-5">
+              <%= blog.title %>
+            </h2>
+            <div class="author-info flex space-x-5 lg:space-x-10 text-xs lg:text-sm mb-10">
+              <p class="flex space-x-2 items-center">
+                <img src="<%= blog.author.profileImage %>" class="border w-6 h-6 rounded-full" alt="author-image" />
+                <span>By <%= blog.author.userName %></span>
+              </p>
+
+              <p class="flex space-x-2 items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                  stroke="currentColor" class="size-5">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M6.75 2.994v2.25m10.5-2.25v2.25m-14.252 13.5V7.491a2.25 2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v11.251m-18 0a2.25 2.25 0 0 0 2.25 2.25h13.5a2.25 2.25 0 0 0 2.25-2.25m-18 0v-7.5a2.25 2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v7.5m-6.75-6h2.25m-9 2.25h4.5m.002-2.25h.005v.006H12v-.006Zm-.001 4.5h.006v.006h-.006v-.005Zm-2.25.001h.005v.006H9.75v-.006Zm-2.25 0h.005v.005h-.006v-.005Zm6.75-2.247h.005v.005h-.005v-.005Zm0 2.247h.006v.006h-.006v-.006Zm2.25-2.248h.006V15H16.5v-.005Z" />
+                </svg>
+
+                <span>
+                  <%= new Date(blog.createdAt).toLocaleDateString('en-GB', {day:'2-digit', month:'long',
+                    year:'numeric'}) %>
+                </span>
+              </p>
+
+              <p class="flex space-x-2 items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                  stroke="currentColor" class="size-5">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
+                </svg>
+
+                <span>
+                  <%= commentval.length %>
+                </span>
+              </p>
+            </div>
+          </div>
+
+          <div class="Bannerimage mb-10">
+            <img src="<%= blog.blogImage %>" class="rounded-2xl w-full h-115 mx-auto object-fit-cover"
+              alt="banner-image" />
+          </div>
+
+          <div class="blog-content mx-auto">
+            <% blog.blogContent.split('\n').forEach((line,index)=>{ %>
+              <p class="text-xs sm:text-sm lg:text-lg text-white mb-5">
+                <%= line %>
+              </p>
+              <% }) %>
+          </div>
+
+          <div class="link-and-unlike">
+            <a href="/blogDetails/<%= blog._id %>/like" 
+              class="text-indigo-600 border border-indigo-600 hover:bg-indigo-600 hover:text-white focus:outline-none font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                <path
+                  d="M7.493 18.5c-.425 0-.82-.236-.975-.632A7.48 7.48 0 0 1 6 15.125c0-1.75.599-3.358 1.602-4.634.151-.192.373-.309.6-.397.473-.183.89-.514 1.212-.924a9.042 9.042 0 0 1 2.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 0 0 .322-1.672V2.75A.75.75 0 0 1 15 2a2.25 2.25 0 0 1 2.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 0 1-2.649 7.521c-.388.482-.987.729-1.605.729H14.23c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 0 0-1.423-.23h-.777ZM2.331 10.727a11.969 11.969 0 0 0-.831 4.398 12 12 0 0 0 .52 3.507C2.28 19.482 3.105 20 3.994 20H4.9c.445 0 .72-.498.523-.898a8.963 8.963 0 0 1-.924-3.977c0-1.708.476-3.305 1.302-4.666.245-.403-.028-.959-.5-.959H4.25c-.832 0-1.612.453-1.918 1.227Z" />
+              </svg>
+              <span class="ml-1">(<%= blog.likes.length %>)</span>
+            </a>
+
+            <a href="/blogDetails/<%= blog._id %>/dislike"
+              class="text-indigo-600 border border-indigo-600 hover:bg-indigo-600 hover:text-white focus:outline-none font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                <path
+                  d="M15.73 5.5h1.035A7.465 7.465 0 0 1 18 9.625a7.465 7.465 0 0 1-1.235 4.125h-.148c-.806 0-1.534.446-2.031 1.08a9.04 9.04 0 0 1-2.861 2.4c-.723.384-1.35.956-1.653 1.715a4.499 4.499 0 0 0-.322 1.672v.633A.75.75 0 0 1 9 22a2.25 2.25 0 0 1-2.25-2.25c0-1.152.26-2.243.723-3.218.266-.558-.107-1.282-.725-1.282H3.622c-1.026 0-1.945-.694-2.054-1.715A12.137 12.137 0 0 1 1.5 12.25c0-2.848.992-5.464 2.649-7.521C4.537 4.247 5.136 4 5.754 4H9.77a4.5 4.5 0 0 1 1.423.23l3.114 1.04a4.5 4.5 0 0 0 1.423.23ZM21.669 14.023c.536-1.362.831-2.845.831-4.398 0-1.22-.182-2.398-.52-3.507-.26-.85-1.084-1.368-1.973-1.368H19.1c-.445 0-.72.498-.523.898.591 1.2.924 2.55.924 3.977a8.958 8.958 0 0 1-1.302 4.666c-.245.403.028.959.5.959h1.053c.832 0 1.612-.453 1.918-1.227Z" />
+              </svg>
+              <span class="ml-1">(<%= blog.dislikes.length %>)</span>
+            </a>
+          </div>
+
+          <!-------------- BLOG DETAILS END --------------->
+
+          <!-------------- COMMENT SECTION START --------------->
+
+          <div class="comment-section">
+            <h4 class="title flex items-center text-2xl mb-5 mt-25 text-white font-bold">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-5 me-2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
+              </svg>
+              Comments ( <%= commentval.length %> )
+            </h4>
+
+            <form action="<%= isEditing ? `/blogDetails/update/${comment._id}` : `/blogDetails/${blog._id}` %>"
+              method="post">
+              <textarea name="comments" id="comments" placeholder="Write a Comment..."
+                class="w-full h-25 border rounded-lg bg-white p-3 mb-3 focus:outline-none"><%= isEditing ? comment.comments : ''  %></textarea>
+              <button
+                class="<%= isEditing ? 'bg-green-600 hover:bg-green-800' : 'bg-indigo-600 hover:bg-indigo-800' %> py-2 px-3 rounded font-medium text-white cursor-pointer">
+                <%= isEditing ? 'Update Comment' : 'Post Comment' %>
+              </button>
+            </form>
+
+            <div class="mt-5">
+              <% commentval.forEach((val)=>{ %>
+                <div
+                  class="bg-indigo-900/30 mb-5 w-full max-w-[600px] space-y-4 p-3 rounded-md border border-gray-300/60 text-white text-sm">
+                  <div class="flex justify-between items-center">
+                    <p>
+                      <%= new Date(val.createdAt).toLocaleDateString('en-GB', {day:'2-digit', month:'long',
+                        year:'numeric'}) %>
+                    </p>
+                  </div>
+                  <p>“<%= val.comments %>”</p>
+                  <div class="flex">
+                    <div class="flex items-center gap-2 ">
+                      <img class="h-8 w-8 rounded-full"
+                        src="<%= val.author.profileImage || '../../images/default-avatar.jpg' %>" alt="userImage1">
+                      <p class="text-white font-medium">
+                        <%= val.author.userName %>
+                      </p>
+                    </div>
+
+                    <div class="flex gap-x-1 items-center ms-auto">
+                      <% if (author && val.author._id.toString()===author._id.toString()) { %>
+                        <a href="/blogDetails/delete/<%= val._id %>" class="text-danger">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                            class="size-5 text-red-600">
+                            <path fill-rule="evenodd"
+                              d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z"
+                              clip-rule="evenodd" />
+                          </svg>
+
+                        </a>
+                        <a href="/blogDetails/edit/<%= val._id %>" class="text-primary">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                            class="size-5 text-indigo-600">
+                            <path
+                              d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" />
+                            <path
+                              d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
+                          </svg>
+
+                        </a>
+                        <% } %>
+                    </div>
+                  </div>
+                </div>
+                <% }) %>
+            </div>
+          </div>
+
+          <!-------------- COMMENT SECTION END --------------->
+        </div>
+
+        <!-------------- ASIDE RELATED POST SECTION START --------------->
+        <div class="col-span-1">
+          <aside class="sticky top-32 max-h-[calc(100vh-8rem)] overflow-y-auto">
+            <h2 class="text-xl font-semibold text-white mb-6 border-b border-gray-200 pb-2">Related Posts</h2>
+            <ul class="space-y-6 divide divide-y divide-gray-500">
+              <% const filterBlog=blogs.filter(val=> val.category ===
+                blog.category) %> <% filterBlog.slice(0,4).forEach((blog)=>{ %>
+                  <li>
+                    <a href="/blogDetails/<%= blog._id %>"
+                      class="flex items-start space-x-4 hover:bg-indigo-900 mb-5 rounded-lg p-2 transition">
+                      <img src="<%= blog.blogImage %>" alt="Post 1"
+                        class="w-16 h-16 rounded-lg object-cover flex-shrink-0" />
+                      <div>
+                        <h3 class="text-white font-semibold transition">
+                          <%= blog.title %>
+                        </h3>
+                        <p class="text-sm text-gray-500 mt-1">
+                          <%= new Date(blog.createdAt).toLocaleDateString('en-GB', {day:'2-digit', month:'long',
+                            year:'numeric'}) %>
+                        </p>
+                      </div>
+                    </a>
+                  </li>
+
+                  <% }) %>
+            </ul>
+          </aside>
+        </div>
+
+        <!-------------- ASIDE RELATED POST SECTION END --------------->
+      </div>
+    </section>
+    </main>
+
+    <%- include('../partials/footer') %>

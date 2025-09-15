@@ -1,0 +1,125 @@
+<%- include('../partials/header') %>
+
+<article class="bg-[url('../images/bg-gradient-4.svg')] bg-cover bg-norepeat bg-indigo-950 w-full h-full">
+  <section class="py-30">
+    <div class="container px-5 mx-auto lg:max-w-7xl">
+      <form action="#">
+        <div class="flex bg-white mx-auto mb-10 items-center border pl-4 gap-2 border-gray-500/30 h-[46px] rounded-full overflow-hidden max-w-md w-full">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 30 30" fill="#6B7280">
+            <path d="M13 3C7.489 3 3 7.489 3 13s4.489 10 10 10a9.95 9.95 0 0 0 6.322-2.264l5.971 5.971a1 1 0 1 0 1.414-1.414l-5.97-5.97A9.95 9.95 0 0 0 23 13c0-5.511-4.489-10-10-10m0 2c4.43 0 8 3.57 8 8s-3.57 8-8 8-8-3.57-8-8 3.57-8 8-8"/>
+          </svg>
+          <input id="searchProcess" type="search" placeholder="Search" class="w-full h-full outline-none text-gray-500 bg-transparent placeholder-gray-500 text-sm">
+        </div>
+      </form>
+
+      <div class="title flex items-center justify-between mb-10">
+        <span class="border-b-1 border-white w-full"></span>
+        <h2 class="text-4xl text-white font-extrabold w-200 text-center"
+          ><%= selectedCategory? `${selectedCategory}` : 'All Blogs' %></h2
+        >
+        <span class="border-b-1 border-white w-full"></span>
+      </div>
+  
+      <% if (blogs.length === 0 ) {%>
+      <div class="text-center text-white">
+        <h2 class="text-3xl">No Blog Data</h2>
+      </div>
+  
+      <% } else { %>
+  
+      <div class="grid grid-cols-2 gap-6">
+        <% blogs.forEach(blog =>{ %>
+  
+        <div class="blog-card bg-black text-white overflow-hidden rounded-2xl relative w-full h-120">
+          <div class="relative -mt-px overflow-hidden">
+            <img
+              src="<%= blog.blogImage %>"
+              alt=""
+              class="h-90 w-full object-cover object-center"
+            />
+            <div
+              class="absolute bottom-0 z-10 h-60 w-full bg-gradient-to-t pointer-events-none from-black to-transparent"
+            ></div>
+          </div>
+          <div class="px-4 pb-4">
+            <p
+              class="category-name absolute right-5 top-5 py-1 px-2 rounded bg-indigo-900 text-center text-sm text-white"
+            >
+              <%= blog.category %>
+            </p>
+            <div class="absolute bottom-5 left-0 right-0 px-3 text-white">
+              <div class="flex justify-between items-end border-b-1 pb-3">
+                <a href="/blogDetails/<%= blog._id %>" class="blog-title text-xl hover:underline"> <%= blog.title.length > 25 ? blog.title.substring(0, 25) + "..." : blog.title %> </a>
+                <span class="text-sm"><%= blog.author.userName %></span>
+              </div>
+              <div class="flex items-center justify-between mt-3">
+  
+                <p class="text-end text-sm ms-auto flex space-x-3">
+                  <span class="capitalize">
+                    <%= new Date(blog.createdAt).toLocaleDateString('en-GB', { day
+                    : '2-digit', month: 'short', year: 'numeric' }) %>
+                  </span>
+  
+                  <span class="capitalize">
+                      
+                      <%
+                     const now = new Date()
+                     const created = new Date(blog.createdAt)
+   
+                     const seconds = now - created
+                     const minutes = Math.floor(seconds/ 1000 / 60)
+                     const hours = Math.floor(minutes / 60)
+                     const days = Math.floor(hours / 24)
+   
+                     let timeAgo = ''
+   
+                     if(minutes < 1){
+                       timeAgo = 'Just Now'
+                     }else if(minutes < 60){
+                       timeAgo = minutes + ' Minutes Ago'
+                     }else if(hours < 24){
+                       timeAgo = hours + ' Hours Ago'
+                     }else {
+                       timeAgo = days + ' Days Ago'
+                     }
+                     %>
+                      
+                      <%= timeAgo %> 
+                    </span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <% }) %>
+      </div>
+  
+      <% } %>
+    </div>
+  </section>
+
+  <script>
+
+    const searchInput = document.getElementById("searchProcess");
+    const blogCards = document.querySelectorAll(".blog-card");
+
+    searchInput.addEventListener("keyup", function () {
+    let serchProcess = searchInput.value.toLowerCase();
+
+    blogCards.forEach(card => {
+      let title = card.querySelector(".blog-title").textContent.toLowerCase();
+      let category = card.querySelector(".category-name").textContent.toLowerCase();
+
+      if (title.includes(serchProcess) || category.includes(serchProcess)) {
+        card.style.display = "";  
+      } else {
+        card.style.display = "none";  
+      }
+    });
+  });
+
+  </script>
+</article>
+
+<%- include('../partials/footer') %>
