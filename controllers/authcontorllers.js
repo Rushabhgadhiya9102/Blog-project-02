@@ -13,11 +13,15 @@ exports.signUpPage = (req,res)=>{
 
 exports.signUpProcess = async (req,res)=>{
     try {
-        
-        req.body.password = await bcrypt.hash(req.body.password, 10)
-        await UserData.create(req.body)
-        console.log("User Created Successfully", req.body);
-        return res.redirect('/login')
+        const{password, confirmPassword} = req.body
+        if(password === confirmPassword){
+            req.body.password = await bcrypt.hash(req.body.password, 10)
+            await UserData.create(req.body)
+            return res.redirect('/login')
+        }else{
+            console.log('confirmPassword and password is not match');
+            return res.redirect('/signup')
+        }
 
     } catch (error) {
         console.log(error.message);
