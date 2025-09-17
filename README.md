@@ -146,6 +146,32 @@ Blog-project-02/
 *   `GET /deleteAccount`: Handles deleting user account.
 *   `GET /logout`: Handles user logout.
 
+## Screen Shots
+
+### Login page
+![Login Page](./public/screentshorts-images/login.png)
+
+### Register page
+![Register Page](./public/screentshorts-images/sign-up.png)
+
+### Home page
+![Register Page](./public/screentshorts-images/home-page.png)
+
+### Add Blogs page
+![Add Blogs Page](./public/screentshorts-images/add-blogs.png)
+
+### Blogs Details page
+![Blogs Details Page](./public/screentshorts-images/blog-details.png)
+
+### Blogs category page
+![Blogs Category Page](./public/screentshorts-images/category.png)
+
+### Edit profile page
+![Edit Profile Page](./public/screentshorts-images/edit-profile.png)
+
+### My Blogs page
+![Edit Profile Page](./public/screentshorts-images/my-blogs.png)
+
 ### Contributing
 
 Contributions are welcome! Please feel free to submit a pull request or open an issue.
