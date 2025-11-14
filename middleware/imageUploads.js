@@ -2,7 +2,7 @@ const multer = require('multer');
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const cloudinary = require('../configs/cloudinary');
 
-// ✅ Single storage that handles all three types based on fieldname
+// Single storage that handles all three types based on fieldname
 const storage = new CloudinaryStorage({
   cloudinary,
   params: async (req, file) => {
@@ -29,7 +29,7 @@ const storage = new CloudinaryStorage({
   }
 });
 
-// ✅ Upload middlewares
+// Upload middlewares
 const imageUpload = multer({ storage }).single('blogImage');
 const profileUploads = multer({ storage }).fields([
   { name: 'profileImage', maxCount: 1 },
